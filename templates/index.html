@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Document</title>
+    <title>TODO</title>
 </head>
 <body>
     <div style="margin-Top:150px;" class="container">
@@ -31,14 +31,13 @@
         </form><br>
 
         {% if todos==[] %}
-        <div class="alert alert-warning" role="alert"
+        <div class="alert alert-warning" role="alert">
 
             Yapılacak bir iş bulunmuyor.
       
-        ></div>
+        </div>
 
         {% else %}
-
         <table class="table">
             <thead>
               <tr>
@@ -53,24 +52,25 @@
             </thead>
 
             <tbody>
-              <tr>
-                {%for todo in todos%}
+              
+              {% for todo in todos %}
+                <tr>
                     <th scope="row">{{todo.id}}</th>
                     <td>{{todo.title}}</td>
                     <td>{{todo.content}}</td>
-                    {% if todo.complete==False %}
+                  {% if todo.complete==False %}
                     <td>Tamamlanmadı</td>
                     {% else %}
                     <td>Tamamlandı</td>
                     {% endif %}
-                    <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Tamamla</a><td>
-                    <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Sil</a><td>
-                 {% endfor %}   
-                </tr>           
+                    <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Tamamla</a></td>
+                    <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>  
+                </tr>    
+                    {% endfor %} 
+
+          {% endif%}       
             </tbody>
           </table>
-
-          {% endif %}
 
 
 

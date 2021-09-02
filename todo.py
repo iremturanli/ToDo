@@ -3,7 +3,7 @@ from  flask_sqlalchemy import SQLAlchemy
 from flask import request
 
 app=Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:////home/turkai/Masaüstü/workplace/Flask/todolist/db/todo.db'
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:////home/turkai/Masaüstü/workplace/Flask/todolist/todolist/db/todolist.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False 
 
 
@@ -30,7 +30,7 @@ def addTodo():
 @app.route("/complete/<string:id>",methods=["GET"])
 def completeTodo(id):
 
-    todo=db.session.query(Todo).filter_by(Todo.id==id).first()
+    todo=db.session.query(Todo).filter(Todo.id==id).first()
     
     if todo.complete==False:
         todo.complete=True
@@ -43,9 +43,9 @@ def completeTodo(id):
 
 
 @app.route("/delete/<string:id>")
-def delete():
-    delete=db.session.query(Todo).filter_by(Todo.id==id)
-    db.session.delete(delete)
+def deleteTodo(id):
+    todo=db.session.query(Todo).filter(Todo.id==id).first()
+    db.session.delete(todo)
     db.session.commit()
 
     return redirect(url_for("index"))
